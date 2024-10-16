@@ -1,9 +1,13 @@
 package giuseppeacquaviva.U5S7L5.controllers;
 
 import giuseppeacquaviva.U5S7L5.entities.Evento;
+import giuseppeacquaviva.U5S7L5.entities.Utente;
 import giuseppeacquaviva.U5S7L5.payloads.EventoDTO;
+import giuseppeacquaviva.U5S7L5.payloads.UtenteDTO;
 import giuseppeacquaviva.U5S7L5.services.EventoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -18,11 +22,6 @@ public class EventoController {
     @PostMapping("")
     public Evento creaEvento(@RequestBody EventoDTO eventoDTO, @RequestParam String username) {
         return eventoService.creaEvento(eventoDTO, username);
-    }
-
-    @GetMapping("/me")
-    public List<Evento> eventiCreati(@RequestParam String username) {
-        return eventoService.trovaEventiCreati(username);
     }
 
     @PutMapping("/{id}")

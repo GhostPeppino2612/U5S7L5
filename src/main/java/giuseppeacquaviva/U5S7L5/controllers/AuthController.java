@@ -36,9 +36,9 @@ public class AuthController {
         if (validation.hasErrors()) {
             throw new BadRequestException(validation.getAllErrors());
         }
-        Utente savedDipendente = utenteService.salvaUtente(body);
-        return new UtenteDTO(savedDipendente.getUsername(), savedDipendente.getPassword(),
-                savedDipendente.getRuolo());
+        Utente savedUtente = utenteService.salvaUtente(body);
+        return new UtenteDTO(savedUtente.getUsername(), savedUtente.getPassword(),
+                savedUtente.getRuolo());
     }
 
 }
