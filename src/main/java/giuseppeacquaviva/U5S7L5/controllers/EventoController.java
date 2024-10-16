@@ -7,6 +7,7 @@ import giuseppeacquaviva.U5S7L5.payloads.UtenteDTO;
 import giuseppeacquaviva.U5S7L5.services.EventoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,16 +21,19 @@ public class EventoController {
     private EventoService eventoService;
 
     @PostMapping("")
+    @PreAuthorize("hasAuthority('ORGANIZZATORE')")
     public Evento creaEvento(@RequestBody EventoDTO eventoDTO, @RequestParam String username) {
         return eventoService.creaEvento(eventoDTO, username);
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('ORGANIZZATORE')")
     public Evento aggiornaEvento(@PathVariable Long id, @RequestBody EventoDTO eventoDTO, @RequestParam String username) {
         return eventoService.aggiornaEvento(id, eventoDTO, username);
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ORGANIZZATORE')")
     public void eliminaEvento(@PathVariable Long id, @RequestParam String username) {
         eventoService.eliminaEvento(id, username);
     }
